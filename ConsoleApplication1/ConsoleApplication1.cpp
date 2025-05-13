@@ -12,38 +12,62 @@ struct Book {
 
 void addBook(vector<Book>& library) {
     Book newBook;
-    cout << "Введiть назву книги: ";
+    cout << "Enter the book title: ";
     getline(cin >> ws, newBook.title);
-    cout << "Введiть автора: ";
+    cout << "Enter the author: ";
     getline(cin, newBook.author);
-    cout << "Введiть рiк видання: ";
+    cout << "Enter the publication year: ";
     cin >> newBook.year;
 
     library.push_back(newBook);
-    cout << "Книгу додано!\n";
+    cout << "Book added!\n";
 }
 
 void showLibrary(const vector<Book>& library) {
     if (library.empty()) {
-        cout << "Бiблiотека порожня.\n";
+        cout << "The library is empty.\n";
         return;
     }
 
-    cout << "Список книг:\n";
+    cout << "List of books:\n";
     for (const auto& book : library) {
-        cout << "Назва: " << book.title
-            << ", Автор: " << book.author
-            << ", Рiк: " << book.year << endl;
+        cout << "Title: " << book.title
+            << ", Author: " << book.author
+            << ", Year: " << book.year << endl;
     }
 }
 
 int main() {
-    setlocale(LC_CTYPE, "ukr");
-    vector<Book> library = {};
-    int choice, e;
-    addBook(library);
-    showLibrary(library);
-    cout << "\nЩоб вийти з програми введьть будь яке значення ";
-    cin >> e;
+    vector<Book> library = {
+        {"Kobzar", "Taras Shevchenko", 1840},
+        {"Forest Song", "Lesya Ukrainka", 1911},
+        {"Do the Oxen Roar When the Manger is Full?", "Panas Myrnyi", 1880},
+        {"Enchanted Desna", "Oleksandr Dovzhenko", 1942},
+        {"City", "Valerian Pidmohylnyi", 1928}
+    };
+    int choice;
+
+    do {
+        cout << "\n=== Home Library ===\n";
+        cout << "1. Add a book\n";
+        cout << "2. Show all books\n";
+        cout << "3. Exit\n";
+        cout << "Your choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            addBook(library);
+            break;
+        case 2:
+            showLibrary(library);
+            break;
+        case 3:
+            break;
+        default:
+            cout << "Invalid choice. Try again.\n";
+        }
+    } while (choice != 3);
+
     return 0;
 }
